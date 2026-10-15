@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Лабораторна робота</title>
+<style>
+    :root {
+        --bg: #fafafa;
+        --panel: #ffffff;
+        --border: #e2e2e2;
+        --text: #222222;
+        --text-muted: #767676;
+        --accent: #3462cf;
+        --accent-bg: #eef2fc;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .page {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 40px 20px 64px;
+    }
+
+    header {
+        margin-bottom: 32px;
+    }
+
+    header h1 {
+        margin: 0 0 6px;
+        font-size: 22px;
+    }
+
+    header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    .group-title {
+        margin: 36px 0 14px;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .task {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 16px 18px;
+        margin-bottom: 16px;
+    }
+
+    .task h3 {
+        margin: 0 0 6px;
+        font-size: 15.5px;
+        font-weight: 600;
+    }
+
+    .task p.desc {
+        margin: 0 0 12px;
+        color: var(--text-muted);
+        font-size: 13.5px;
+    }
+
+    button {
+        appearance: none;
+        border: 1px solid var(--accent);
+        background: var(--accent-bg);
+        color: var(--accent);
+        font-size: 13.5px;
+        font-weight: 500;
+        padding: 6px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 0 6px 8px 0;
+    }
+
+    button:hover {
+        background: var(--accent);
+        color: #fff;
+    }
+
+    .output:empty { display: none; }
+
+    .output p {
+        margin: 0 0 6px;
+        padding: 8px 12px;
+        background: var(--accent-bg);
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    @media (max-width: 500px) {
+        button { width: 100%; margin-right: 0; }
+    }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+    <header>
+        <h1>Лабораторна робота</h1>
+        <p>Хшановська Уляна №18</p>
+    </header>
+
+    <h2 class="group-title">Приклади з ходу роботи (книги)</h2>
+
+    <section class="task">
+        <h3>1. Робота з об'єктом book</h3>
+        <p class="desc">Об'єкт із властивостями title, author, year, isRead та методом bookInfo. Значення isRead можна змінити на протилежне.</p>
+        <button onclick="showBookInfo()">Інформація про книгу</button>
+        <button onclick="toggleBookRead()">Змінити isRead на протилежне</button>
+        <div class="output" id="out1"></div>
+    </section>
+
+    <section class="task">
+        <h3>2. Масив library та метод push</h3>
+        <p class="desc">Перебір масиву через displayLibrary і додавання нової книги методом push().</p>
+        <button onclick="displayLibrary('out2')">Показати бібліотеку</button>
+        <button onclick="addGatsbyBook()">Додати «The Great Gatsby»</button>
+        <div class="output" id="out2"></div>
+    </section>
+
+    <section class="task">
+        <h3>3. Методи масивів: sort, filter, find</h3>
+        <p class="desc">Результати також виводяться в консоль браузера (F12).</p>
+        <button onclick="sortLibraryByYear()">Сортувати за роком</button>
+        <button onclick="showUnreadBooks()">Непрочитані книги</button>
+        <button onclick="showTolkienBook()">Книга Толкіна</button>
+        <div class="output" id="out3"></div>
+    </section>
+
+    <section class="task">
+        <h3>4. Взаємодія з користувачем</h3>
+        <p class="desc">Запитує назву, автора, рік видання та чи прочитана книга, додає її до масиву й показує оновлений список.</p>
+        <button onclick="addBookToLibrary()">Додати свою книгу</button>
+        <div class="output" id="out4"></div>
+    </section>
+
+    <section class="task">
+        <h3>5. Додаткове завдання</h3>
+        <p class="desc">Метод markAsRead змінює isRead на true. Функція calculateAverageYear повертає середній рік видання всіх книг.</p>
+        <button onclick="markFirstUnreadBook()">Позначити першу непрочитану як прочитану</button>
+        <button onclick="showAverageYear()">Середній рік видання</button>
+        <div class="output" id="out5"></div>
+    </section>
+
+    <h2 class="group-title">Індивідуальний проєкт: підписки на журнали </h2>
+
+    <section class="task">
+        <h3>1. Робота з об'єктом magazine</h3>
+        <p class="desc">Об'єкт із властивостями name, topic, frequency, price, isActive та методом magazineInfo.</p>
+        <button onclick="showMagazineInfo()">Інформація про журнал</button>
+        <button onclick="toggleMagazineActive()">Змінити isActive на протилежне</button>
+        <div class="output" id="mout1"></div>
+    </section>
+
+    <section class="task">
+        <h3>2. Масив magazines та метод push</h3>
+        <p class="desc">Перебір масиву через displayMagazines і додавання нового журналу методом push().</p>
+        <button onclick="displayMagazines('mout2')">Показати журнали</button>
+        <button onclick="addSportMagazine()">Додати «Спорт і здоров'я»</button>
+        <div class="output" id="mout2"></div>
+    </section>
+
+    <section class="task">
+        <h3>3. Методи масивів: sort, filter, find</h3>
+        <p class="desc">Сортування за ціною підписки, журнали з неактивною підпискою та пошук журналу за тематикою «Мода». Результати також у консолі.</p>
+        <button onclick="sortMagazinesByPrice()">Сортувати за ціною</button>
+        <button onclick="showInactiveMagazines()">Неактивні підписки</button>
+        <button onclick="showFashionMagazine()">Журнал про моду</button>
+        <div class="output" id="mout3"></div>
+    </section>
+
+    <section class="task">
+        <h3>4. Взаємодія з користувачем</h3>
+        <p class="desc">Запитує назву, тематику, періодичність, ціну підписки та чи активна підписка, додає журнал до масиву.</p>
+        <button onclick="addMagazineToList()">Додати свій журнал</button>
+        <div class="output" id="mout4"></div>
+    </section>
+
+    <section class="task">
+        <h3>5. Додаткові функції: markAsActive і calculateAveragePrice</h3>
+        <p class="desc">Метод markAsActive змінює isActive на true. Функція calculateAveragePrice повертає середню ціну підписки.</p>
+        <button onclick="activateFirstInactiveMagazine()">Активувати першу неактивну підписку</button>
+        <button onclick="showAveragePrice()">Середня ціна підписки</button>
+        <div class="output" id="mout5"></div>
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
